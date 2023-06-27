@@ -533,7 +533,7 @@ def main():
             desc="Running tokenizer on train dataset",
         )
 
-    train_dataset.train_test_split(split_size = 0.1)  
+    train_dataset.train_test_split(test_size = 0.1)  
 
     label_pad_token_id = -100 if data_args.ignore_pad_token_for_loss else tokenizer.pad_token_id
     data_collator = DataCollatorForSeq2Seq(
