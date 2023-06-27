@@ -32,6 +32,7 @@ from torch.utils.data import Dataset, SequentialSampler
 from torch.utils.data.distributed import DistributedSampler
 from transformers.utils.versions import require_version
 from datasets import Dataset,DatasetDict
+from transformers import EarlyStoppingCallback
 
 
 check_min_version("4.20.0.dev0")
@@ -542,6 +543,7 @@ def main():
         pad_to_multiple_of=8 if training_args.fp16 else None,
     )
 
+    call_back = EarlyStoppingCallback(early_stopping_patience = 3, early_stopping_threshold = 0.2)
     trainer = InstructorTrainer(
         model=model,
         args=training_args,
@@ -550,6 +552,7 @@ def main():
         tokenizer=tokenizer,
         data_collator=data_collator,
         compute_metrics=None,
+        callbacks = [call_back]
     )
 
     checkpoint = None
