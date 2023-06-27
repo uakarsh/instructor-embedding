@@ -534,6 +534,8 @@ def main():
         )
 
     train_dataset.train_test_split(test_size = 0.1)  
+    print(f"Total training dataset: {len(train_dataset['train'])}")
+    print(f"Total validation dataset: {len(train_dataset['test'])}")
 
     label_pad_token_id = -100 if data_args.ignore_pad_token_for_loss else tokenizer.pad_token_id
     data_collator = DataCollatorForSeq2Seq(
