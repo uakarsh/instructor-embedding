@@ -532,8 +532,7 @@ def main():
             desc="Running tokenizer on train dataset",
         )
 
-    ds = DatasetDict({'train':train_dataset})
-    ds.train_test_split(test_size=0.1)    
+    train_dataset.train_test_split(split_size = 0.1)  
 
     label_pad_token_id = -100 if data_args.ignore_pad_token_for_loss else tokenizer.pad_token_id
     data_collator = DataCollatorForSeq2Seq(
@@ -546,8 +545,8 @@ def main():
     trainer = InstructorTrainer(
         model=model,
         args=training_args,
-        train_dataset=ds['train'],
-        eval_dataset=ds['test'],
+        train_dataset=train_dataset['train'],
+        eval_dataset=train_dataset['test'],
         tokenizer=tokenizer,
         data_collator=data_collator,
         compute_metrics=None,
