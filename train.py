@@ -534,6 +534,7 @@ def main():
         )
 
     train_dataset.train_test_split(test_size = 0.1)  
+    print(train_dataset)
     print(f"Total training dataset: {len(train_dataset['train'])}")
     print(f"Total validation dataset: {len(train_dataset['test'])}")
 
